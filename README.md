@@ -1,3 +1,7 @@
+[comment]: <> (CI status badge)
+[![blogger pull reauest code integration](https://github.com/sargiss987/blogger/actions/workflows/pull_request.yml/badge.svg)](https://github.com/sargiss987/blogger/actions/workflows/pull_request.yml)
+
+
 BRANCHING STRATEGY
 
   The branching strategy is GitHub flow. Here is a brief description for more details please follow the link.
