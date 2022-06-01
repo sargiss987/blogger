@@ -13,6 +13,6 @@ jobs:
         with:
           java-version: 11
       - name: maven clean install
-        run: ./mvnw clean install
+        run: SPRING_PROFILES_ACTIVE=test ./mvnw clean install
       - name: print success message
         run: echo "All jobs were completed successfully!"
