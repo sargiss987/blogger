@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  blogger_db:
+    image: mysql:8.0.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'blogger_db'
+      MYSQL_USER: 'blogger'
+      MYSQL_PASSWORD: 'blogger'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3308:3306'
+    expose:
+      - '3308'
+
+# useful commands
+# docker-compose up -d
+# docker-compose config
