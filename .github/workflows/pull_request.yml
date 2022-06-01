@@ -15,6 +15,6 @@ jobs:
       - name: Grant execute permission for mvnw
         run: chmod +x mvnw
       - name: Maven clean install
-        run: ./mvnw clean install
+        run: SPRING_PROFILES_ACTIVE=test ./mvnw clean install
       - name: Print success message
         run: echo "All jobs were completed successfully!"
