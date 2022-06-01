@@ -12,7 +12,9 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Grant execute permission for mvnw
+        run: chmod +x mvnw
       - name: maven clean install
-        run: ./mvnw clean install
+        run: SPRING_PROFILES_ACTIVE=test ./mvnw clean install
       - name: print success message
         run: echo "All jobs were completed successfully!"
