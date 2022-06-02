@@ -1,23 +1,45 @@
 package com.acba.blogger.model;
 
 import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "user")
 public class User {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", nullable = false)
   private Long id;
 
+  @Column(name = "is_enabled", nullable = false)
   private Boolean isEnabled;
 
+  @Column(name = "first_name", nullable = false)
   private String firstName;
 
+  @Column(name = "last_name", nullable = false)
   private String lastName;
 
+  @Column(name = "email", nullable = false)
   private String email;
 
+  @ManyToOne
+  @JoinColumn(name = "user_role_id")
   private Role role;
 
+  @OneToMany(mappedBy = "blogger")
   private Set<Post> posts;
 
+  @OneToMany(mappedBy = "owner")
   private Set<Comment> comments;
 
   public Long getId() {

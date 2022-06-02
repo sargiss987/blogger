@@ -1,4 +1,4 @@
-name: blogger pull reauest code integration
+name: blogger pull request code integration
 on:
   pull_request:
     branches: [master]

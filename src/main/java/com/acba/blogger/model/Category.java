@@ -1,14 +1,33 @@
 package com.acba.blogger.model;
 
-import com.acba.blogger.model.enums.CategoryType;
 import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "post_category")
 public class Category {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", nullable = false)
   private Long id;
 
+  @Column(name = "type", nullable = false)
   private String type;
 
+  @ManyToMany
+  @JoinTable(
+      name = "post_category_post",
+      joinColumns = @JoinColumn(name = "post_category_id"),
+      inverseJoinColumns = @JoinColumn(name = "post_id"))
   private Set<Post> posts;
 
   public Long getId() {
