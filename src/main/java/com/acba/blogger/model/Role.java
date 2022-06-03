@@ -24,6 +24,16 @@ public class Role {
   @OneToMany(mappedBy = "role")
   private Set<User> users;
 
+  public Role(Long id) {
+    this.id = id;
+  }
+
+  public Role() {}
+
+  public static Role isBlogger() {
+    return new Role(1L);
+  }
+
   public Long getId() {
     return id;
   }
