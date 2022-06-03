@@ -1,15 +1,13 @@
-package com.acba.blogger.config;
+package com.acba.blogger.config.security;
 
+import com.acba.blogger.config.filter.CustomHttpForbiddenEntryPoint;
+import com.acba.blogger.config.filter.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 public class SecurityConfiguration {
@@ -18,10 +16,14 @@ public class SecurityConfiguration {
     "/h2/**", "/api/v1/auth/signup", "/api/v1/auth/login"
   };
 
-  private final UserDetailsService userDetailsService;
+  private final CustomHttpForbiddenEntryPoint forbiddenEntryPoint;
+  private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-  public SecurityConfiguration(UserDetailsService userDetailsService) {
-    this.userDetailsService = userDetailsService;
+  public SecurityConfiguration(
+      CustomHttpForbiddenEntryPoint forbiddenEntryPoint,
+      JwtAuthenticationFilter jwtAuthenticationFilter) {
+    this.forbiddenEntryPoint = forbiddenEntryPoint;
+    this.jwtAuthenticationFilter = jwtAuthenticationFilter;
   }
 
   @Bean
@@ -36,7 +38,12 @@ public class SecurityConfiguration {
         .antMatchers(PUBLIC_URLS)
         .permitAll()
         .anyRequest()
-        .authenticated();
+        .authenticated()
+        .and()
+        .exceptionHandling()
+        .authenticationEntryPoint(forbiddenEntryPoint)
+        .and()
+        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     return http.build();
   }
 }

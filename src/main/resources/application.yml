@@ -9,3 +9,9 @@ spring:
 
   flyway:
     locations: "classpath:db/migration/{vendor}"
+
+
+jwt:
+  token-exp-time: 432_000_000 # 5 days
+  secret: 'ksfhlksjlkesjl;jksl;kfldskdl;ksfl;ks65456s465f4ds68f4dsf46ds4f5snkldj+dlksfnklslsjdkfljsd
+           dnnsvm,sdn\msnvmdsxcvbxcbkjxbvjfbvkdbkj648942121225u39u9**74+9Xas[l]f,as2csscsndl94+++8ax'

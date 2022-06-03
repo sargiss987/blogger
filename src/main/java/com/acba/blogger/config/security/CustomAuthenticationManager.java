@@ -1,6 +1,5 @@
-package com.acba.blogger.config;
+package com.acba.blogger.config.security;
 
-import com.acba.blogger.model.UserPrincipal;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

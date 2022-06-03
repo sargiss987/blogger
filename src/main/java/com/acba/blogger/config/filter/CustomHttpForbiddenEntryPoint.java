@@ -14,21 +14,23 @@ import org.springframework.security.web.authentication.Http403ForbiddenEntryPoin
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomForbiddenEntryPoint extends Http403ForbiddenEntryPoint {
+public class CustomHttpForbiddenEntryPoint extends Http403ForbiddenEntryPoint {
 
-    @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
+  @Override
+  public void commence(
+      HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
+      throws IOException {
 
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+    response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+    response.setStatus(HttpStatus.UNAUTHORIZED.value());
 
-        Map<String,String> exceptionResponse = new HashMap<>();
-        exceptionResponse.put("message",exception.getMessage());
+    Map<String, String> exceptionResponse = new HashMap<>();
+    exceptionResponse.put("message", exception.getMessage());
 
-        try(OutputStream outputStream = response.getOutputStream()){
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.writeValue(outputStream,exceptionResponse);
-            outputStream.flush();
-        }
+    try (OutputStream outputStream = response.getOutputStream()) {
+      ObjectMapper mapper = new ObjectMapper();
+      mapper.writeValue(outputStream, exceptionResponse);
+      outputStream.flush();
     }
+  }
 }

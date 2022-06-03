@@ -32,6 +32,9 @@ public class User {
   @Column(name = "email", nullable = false)
   private String email;
 
+  @Column(name = "password", nullable = false)
+  private String password;
+
   @ManyToOne
   @JoinColumn(name = "user_role_id")
   private Role role;
@@ -42,6 +45,17 @@ public class User {
   @OneToMany(mappedBy = "owner")
   private Set<Comment> comments;
 
+  public User() {}
+
+  public User(String firstName, String lastName, String email, String password, Role role) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.password = password;
+    this.role = role;
+    this.isEnabled = true;
+  }
+
   public Long getId() {
     return id;
   }
@@ -50,7 +64,7 @@ public class User {
     this.id = id;
   }
 
-  public Boolean getEnabled() {
+  public Boolean isEnabled() {
     return isEnabled;
   }
 
@@ -104,5 +118,13 @@ public class User {
 
   public void setComments(Set<Comment> comments) {
     this.comments = comments;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 }
