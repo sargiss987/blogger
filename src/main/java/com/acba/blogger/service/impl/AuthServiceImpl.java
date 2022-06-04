@@ -3,6 +3,7 @@ package com.acba.blogger.service.impl;
 import com.acba.blogger.dto.signup.SignupUserDto;
 import com.acba.blogger.exception.UserEmailAlreadyExistException;
 import com.acba.blogger.mapper.SignupUserMapper;
+import com.acba.blogger.model.Role;
 import com.acba.blogger.model.User;
 import com.acba.blogger.model.UserPrincipal;
 import com.acba.blogger.repository.UserRepository;
@@ -44,6 +45,17 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
     }
     return userRepository.save(
         SignupUserMapper.signupUserDtoToUser(signupUserDto, passwordEncoder));
+  }
+
+  @Override
+  @Transactional
+  public void addHeadAdmin() {
+    String email = "sargiss987@gmail.com";
+    if (userRepository.findByEmail(email).isPresent()) return;
+
+    User headAdmin =
+        new User("Admin", "Admin", email, passwordEncoder.encode("admin"), Role.isAdmin());
+    userRepository.save(headAdmin);
   }
 
   @Override

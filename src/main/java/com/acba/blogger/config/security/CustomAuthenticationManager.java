@@ -25,6 +25,16 @@ public class CustomAuthenticationManager implements AuthenticationManager {
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
     UserDetails userPrincipal = userDetailsService.loadUserByUsername(authentication.getName());
+    isUserEnabled(userPrincipal);
+    return isUserPasswordValid(authentication, userPrincipal);
+  }
+
+  private void isUserEnabled(UserDetails userPrincipal) {
+    if (!userPrincipal.isEnabled()) throw new BadCredentialsException("User disabled");
+  }
+
+  private Authentication isUserPasswordValid(
+      Authentication authentication, UserDetails userPrincipal) {
     if (passwordEncoder.matches(
         authentication.getCredentials().toString(), userPrincipal.getPassword())) {
       return new UsernamePasswordAuthenticationToken(

@@ -1,5 +1,6 @@
 package com.acba.blogger.model;
 
+import com.acba.blogger.model.enums.RoleType;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,6 +33,17 @@ public class Role {
 
   public static Role isBlogger() {
     return new Role(1L);
+  }
+
+  public static Role isAdmin() {
+    return new Role(2L);
+  }
+
+  public static Role getInstance(String roleType) {
+    if (roleType.toUpperCase().equals(RoleType.ADMIN.name())) {
+      return isAdmin();
+    }
+    return isBlogger();
   }
 
   public Long getId() {

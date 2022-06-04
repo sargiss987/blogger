@@ -8,4 +8,6 @@ public interface AuthService {
   User signup(SignupUserDto signupUserDto);
 
   User findUserByEmail(String email);
+
+  void addHeadAdmin();
 }

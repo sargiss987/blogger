@@ -72,7 +72,7 @@ public class Post {
     this.content = content;
   }
 
-  public Boolean getActive() {
+  public Boolean isActive() {
     return isActive;
   }
 

@@ -29,6 +29,7 @@ public class JwtTokenProvider {
 
   public String generateJwtToken(UserPrincipal userPrincipal) {
     return JWT.create()
+        .withIssuer("auth0")
         .withIssuedAt(new Date())
         .withSubject(userPrincipal.getUsername())
         .withArrayClaim(AUTHORITIES, getClaimsFromUser(userPrincipal))
@@ -38,7 +39,8 @@ public class JwtTokenProvider {
 
   public boolean isTokenValid(String token) {
     JWTVerifier verifier = getJwtVerifier();
-    return verifier.verify(token).getExpiresAt().before(new Date());
+    Date expiration = verifier.verify(token).getExpiresAt();
+    return !expiration.before(new Date());
   }
 
   public String getSubject(String token) {
