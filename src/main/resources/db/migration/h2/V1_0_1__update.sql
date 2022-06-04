@@ -1,5 +1,5 @@
 -- -----------------------------------------------------
--- Table `blogger_db`.`user`
+-- Table user
 -- -----------------------------------------------------
-ALTER TABLE `blogger_db`.`user`
+ALTER TABLE `users`
 ADD COLUMN password VARCHAR(255);

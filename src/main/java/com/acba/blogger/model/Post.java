@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "post")
+@Table(name = "posts")
 public class Post {
 
   @Id
@@ -72,7 +72,7 @@ public class Post {
     this.content = content;
   }
 
-  public Boolean getActive() {
+  public Boolean isActive() {
     return isActive;
   }
 

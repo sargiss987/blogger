@@ -11,6 +11,7 @@ import com.acba.blogger.model.User;
 import com.acba.blogger.model.UserPrincipal;
 import com.acba.blogger.service.AuthService;
 import com.acba.blogger.util.JwtTokenProvider;
+import javax.annotation.PostConstruct;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +55,11 @@ public class AuthController {
     return ResponseEntity.ok()
         .headers(headers)
         .body(LoginUserMapper.userToLoginUserResponseDto(user));
+  }
+
+  @PostConstruct
+  public void addHeadAdmin(){
+    authService.addHeadAdmin();
   }
 
   private void authenticate(String username, String password) {

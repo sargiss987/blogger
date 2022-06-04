@@ -10,5 +10,5 @@ spring:
     password:
   jpa:
     show-sql: true
-    database-platform: org.hibernate.dialect.H2Dialect
+
 

@@ -15,9 +15,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `blogger_db`.`user`
+-- Table `blogger_db`.`users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `blogger_db`.`user` (
+CREATE TABLE IF NOT EXISTS `blogger_db`.`users` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `is_enabled` BOOLEAN NOT NULL,
   `first_name` VARCHAR(45) NOT NULL,
@@ -35,9 +35,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `blogger_db`.`post`
+-- Table `blogger_db`.`posts`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `blogger_db`.`post` (
+CREATE TABLE IF NOT EXISTS `blogger_db`.`posts` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
   `content` TEXT NOT NULL,
@@ -48,16 +48,16 @@ CREATE TABLE IF NOT EXISTS `blogger_db`.`post` (
   INDEX `fk_post_user1_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_post_user1`
     FOREIGN KEY (`user_id`)
-    REFERENCES `blogger_db`.`user` (`id`)
+    REFERENCES `blogger_db`.`users` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `blogger_db`.`comment`
+-- Table `blogger_db`.`comments`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `blogger_db`.`comment` (
+CREATE TABLE IF NOT EXISTS `blogger_db`.`comments` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `content` TEXT NOT NULL,
   `rating` INT NULL,
@@ -68,12 +68,12 @@ CREATE TABLE IF NOT EXISTS `blogger_db`.`comment` (
   INDEX `fk_comment_user1_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_comment_post1`
     FOREIGN KEY (`post_id`)
-    REFERENCES `blogger_db`.`post` (`id`)
+    REFERENCES `blogger_db`.`posts` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_comment_user1`
     FOREIGN KEY (`user_id`)
-    REFERENCES `blogger_db`.`user` (`id`)
+    REFERENCES `blogger_db`.`users` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `blogger_db`.`post_category_post` (
     ON UPDATE CASCADE,
   CONSTRAINT `fk_post_category_has_post_post1`
     FOREIGN KEY (`post_id`)
-    REFERENCES `blogger_db`.`post` (`id`)
+    REFERENCES `blogger_db`.`posts` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;

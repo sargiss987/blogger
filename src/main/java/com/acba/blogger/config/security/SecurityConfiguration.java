@@ -2,6 +2,7 @@ package com.acba.blogger.config.security;
 
 import com.acba.blogger.config.filter.CustomHttpForbiddenEntryPoint;
 import com.acba.blogger.config.filter.JwtAuthenticationFilter;
+import com.acba.blogger.model.enums.RoleType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -35,6 +36,8 @@ public class SecurityConfiguration {
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
         .authorizeRequests()
+        .antMatchers("/api/v1/users/**")
+        .hasAuthority(RoleType.ADMIN.name())
         .antMatchers(PUBLIC_URLS)
         .permitAll()
         .anyRequest()
