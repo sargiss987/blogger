@@ -17,14 +17,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
   @Modifying
   @Transactional
-  @Query(value = "UPDATE user SET is_enabled=false WHERE id= :id", nativeQuery = true)
+  @Query(value = "UPDATE users SET is_enabled=false WHERE id= :id", nativeQuery = true)
   void disableUser(Long id);
 
   @Modifying
   @Transactional
   @Query(
       value =
-          "UPDATE user SET "
+          "UPDATE users SET "
               + "first_name = ifNull(:firstName, first_name),"
               + "last_name = ifNull(:lastName, last_name),"
               + "email = ifNull(:email, email),"
