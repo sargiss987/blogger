@@ -36,7 +36,7 @@ public class SecurityConfiguration {
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
         .authorizeRequests()
-        .antMatchers("/api/v1/users/**")
+        .antMatchers("/api/v1/admin/**")
         .hasAuthority(RoleType.ADMIN.name())
         .antMatchers(PUBLIC_URLS)
         .permitAll()

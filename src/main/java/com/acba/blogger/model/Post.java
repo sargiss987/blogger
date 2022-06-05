@@ -48,6 +48,14 @@ public class Post {
       inverseJoinColumns = @JoinColumn(name = "post_category_id"))
   private Set<Category> categories;
 
+  public Post() {}
+
+  public Post(String title, String content) {
+    this.title = title;
+    this.content = content;
+    this.isActive = true;
+  }
+
   public Long getId() {
     return id;
   }

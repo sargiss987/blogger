@@ -8,6 +8,7 @@ import com.acba.blogger.model.User;
 import com.acba.blogger.model.UserPrincipal;
 import com.acba.blogger.repository.UserRepository;
 import com.acba.blogger.service.AuthService;
+import java.util.Optional;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -59,7 +60,7 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
   }
 
   @Override
-  public User findUserByEmail(String email) {
-    return userRepository.findUserByEmail(email);
+  public Optional<User> findUserByEmail(String email) {
+    return userRepository.findByEmail(email);
   }
 }

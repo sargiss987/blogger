@@ -32,6 +32,14 @@ public class Comment {
   @JoinColumn(name = "post_id")
   private Post post;
 
+  public Comment() {}
+
+  public Comment(String content, User owner, Post post) {
+    this.content = content;
+    this.owner = owner;
+    this.post = post;
+  }
+
   public Long getId() {
     return id;
   }
