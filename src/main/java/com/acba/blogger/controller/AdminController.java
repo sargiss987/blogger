@@ -9,6 +9,7 @@ import com.acba.blogger.service.AdminService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +45,7 @@ public class AdminController {
 
   @PostMapping
   public ResponseEntity<CreateUserResponseDto> createUser(
-      @RequestBody CreateUserDto createUserDto) {
+      @Valid @RequestBody CreateUserDto createUserDto) {
     return ResponseEntity.ok(
         UserMapper.userToCreateUserResponseDto(userService.createUser(createUserDto)));
   }

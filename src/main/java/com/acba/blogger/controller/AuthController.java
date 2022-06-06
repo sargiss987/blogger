@@ -12,6 +12,7 @@ import com.acba.blogger.model.UserPrincipal;
 import com.acba.blogger.service.AuthService;
 import com.acba.blogger.util.JwtTokenProvider;
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +43,8 @@ public class AuthController {
   }
 
   @PostMapping("signup")
-  public ResponseEntity<SignupUserResponseDto> signup(@RequestBody SignupUserDto signupUserDto) {
+  public ResponseEntity<SignupUserResponseDto> signup(
+      @Valid @RequestBody SignupUserDto signupUserDto) {
     return ResponseEntity.status(HttpStatus.CREATED)
         .body(SignupUserMapper.userToSignupUserResponseDto(authService.signup(signupUserDto)));
   }
