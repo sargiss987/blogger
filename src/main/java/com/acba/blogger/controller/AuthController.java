@@ -50,7 +50,7 @@ public class AuthController {
   @PostMapping("login")
   public ResponseEntity<LoginUserResponseDto> login(@RequestBody LoginUserDto loginUserDto) {
     authenticate(loginUserDto.getEmail(), loginUserDto.getPassword());
-    User user = authService.findUserByEmail(loginUserDto.getEmail());
+    User user = authService.findUserByEmail(loginUserDto.getEmail()).get();
     HttpHeaders headers = getJwtHeader(new UserPrincipal(user));
     return ResponseEntity.ok()
         .headers(headers)
@@ -58,7 +58,7 @@ public class AuthController {
   }
 
   @PostConstruct
-  public void addHeadAdmin(){
+  public void addHeadAdmin() {
     authService.addHeadAdmin();
   }
 

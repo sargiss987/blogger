@@ -30,6 +30,14 @@ public class Category {
       inverseJoinColumns = @JoinColumn(name = "post_id"))
   private Set<Post> posts;
 
+  public Category(Long id) {
+    this.id = id;
+  }
+
+  public static Category getInstance(Long id) {
+    return new Category(id);
+  }
+
   public Long getId() {
     return id;
   }

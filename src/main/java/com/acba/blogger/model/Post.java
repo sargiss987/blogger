@@ -41,12 +41,23 @@ public class Post {
   @OneToMany(mappedBy = "post")
   private Set<Comment> comments;
 
+  @OneToMany(mappedBy = "post")
+  private Set<PostGrade> postGrades;
+
   @ManyToMany
   @JoinTable(
       name = "post_category_post",
       joinColumns = @JoinColumn(name = "post_id"),
       inverseJoinColumns = @JoinColumn(name = "post_category_id"))
   private Set<Category> categories;
+
+  public Post() {}
+
+  public Post(String title, String content) {
+    this.title = title;
+    this.content = content;
+    this.isActive = true;
+  }
 
   public Long getId() {
     return id;
@@ -110,5 +121,13 @@ public class Post {
 
   public void setCategories(Set<Category> categories) {
     this.categories = categories;
+  }
+
+  public Set<PostGrade> getPostGrades() {
+    return postGrades;
+  }
+
+  public void setPostGrades(Set<PostGrade> postGrades) {
+    this.postGrades = postGrades;
   }
 }
