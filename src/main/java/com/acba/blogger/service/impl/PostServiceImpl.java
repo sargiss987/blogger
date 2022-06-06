@@ -54,7 +54,6 @@ public class PostServiceImpl implements PostService {
     Optional<PostGrade> postGrade = Optional.empty();
     if (post.isPresent() && PostGrade.isValidGrade(grade)) {
       postGrade = Optional.of(postGradeRepository.save(new PostGrade(grade, post.get())));
-      postRepository.updatePostRating();
     }
     return postGrade;
   }
