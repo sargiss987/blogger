@@ -2,6 +2,7 @@ package com.acba.blogger.mapper;
 
 import com.acba.blogger.dto.post.AddPostDto;
 import com.acba.blogger.dto.post.AddPostResponseDto;
+import com.acba.blogger.dto.post.PostDto;
 import com.acba.blogger.model.Category;
 import com.acba.blogger.model.Post;
 import com.acba.blogger.model.User;
@@ -26,11 +27,28 @@ public class PostMapper {
     return post;
   }
 
+  public static PostDto postToPostDto(Post post) {
+    return new PostDto(
+        post.getId(),
+        post.getTitle(),
+        post.getContent(),
+        post.isActive(),
+        post.getRating(),
+        createFullName(post.getBlogger().getFirstName(), post.getBlogger().getLastName()),
+        post.getComments().stream()
+            .map(CommentMapper::commentToPostCommentDto)
+            .collect(Collectors.toList()));
+  }
+
   private static void setCategories(Post post, Set<String> categories) {
     post.setCategories(
         categories.stream()
             .filter(type -> CategoryType.getIdByType(type) != null)
             .map(type -> Category.getInstance(CategoryType.getIdByType(type)))
             .collect(Collectors.toSet()));
+  }
+
+  private static String createFullName(String firstName, String lastName) {
+    return firstName + " " + lastName;
   }
 }

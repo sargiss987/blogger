@@ -41,6 +41,9 @@ public class Post {
   @OneToMany(mappedBy = "post")
   private Set<Comment> comments;
 
+  @OneToMany(mappedBy = "post")
+  private Set<PostGrade> postGrades;
+
   @ManyToMany
   @JoinTable(
       name = "post_category_post",
@@ -118,5 +121,13 @@ public class Post {
 
   public void setCategories(Set<Category> categories) {
     this.categories = categories;
+  }
+
+  public Set<PostGrade> getPostGrades() {
+    return postGrades;
+  }
+
+  public void setPostGrades(Set<PostGrade> postGrades) {
+    this.postGrades = postGrades;
   }
 }
